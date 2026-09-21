@@ -190,6 +190,18 @@ Someone deploys a VNet template incrementally, then later removes an NSG from th
 
 ---
 
+## Exam memory (path 01)
+
+AZ-104 **will show snippets** (ARM JSON, Bicep, Azure CLI, PowerShell). You read and modify; you do not author a platform from scratch.
+
+- One-page memory: `exam/remember.md`
+- CLI ↔ PowerShell pairs: `exam/commands.md`
+- “If you see this exhibit…”: `exam/snippets.md`
+
+We add a `commands.md` per learning path as you go. Do not start a mega dump of every `az` command in Azure.
+
+---
+
 ## Exam traps from this path
 
 1. Cloud Shell timeout is **idle**, not max session length.

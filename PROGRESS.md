@@ -13,6 +13,7 @@ Scoring rule: a module is checked off only after a `/quiz` score of **90% or hig
   - Interview: completed 2026-09-21 — definitions solid; initial gaps on persistence, idle timeout, incremental vs complete
   - Quiz 1 (2026-09-21): 7/10 (70%) FAIL — NEEDS REVIEW
   - Quiz 2 (2026-09-21): **10/10 (100%) PASS** — prior misses closed; path checked off
+  - Quiz 3 snippets (2026-09-21): **10/10 (100%) PASS** — CLI/ARM/Bicep exhibits closed
 - [ ] **02 Manage identities and governance in Azure**
 - [ ] **03 Implement and manage storage in Azure**
 - [ ] **04 Deploy and manage Azure compute resources**
@@ -25,3 +26,4 @@ Scoring rule: a module is checked off only after a `/quiz` score of **90% or hig
 | --- | --- | --- | --- |
 | 2026-09-21 | 01 Prerequisites — Quiz 1 | 7/10 (70%) | FAIL — NEEDS REVIEW |
 | 2026-09-21 | 01 Prerequisites — Quiz 2 | 10/10 (100%) | PASS |
+| 2026-09-21 | 01 Prerequisites — Quiz 3 snippets | 10/10 (100%) | PASS |

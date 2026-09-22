@@ -8,7 +8,7 @@ alwaysApply: true
 
 ## 1. Progress & Folder Structure
 - **`PROGRESS.md`:** Auto-edit to mark completions (`- [x]`) and log quiz scores. If score < 90%, mark `NEEDS REVIEW`; do not check off the module.
-- **Scaffolding:** For new modules, create `[Module-Name]/` containing: `README.md` (enterprise scenarios), `poc/` (Azure CLI, Azure PowerShell, ARM JSON and/or Bicep — match the current Learn module), and `quizzes/`.
+- **Scaffolding:** One folder per learning path (`NN-path-name/`) containing a path `README.md` index, `exam/` (`commands.md`, `snippets.md`, `remember.md`), path-level `quizzes/`, and **one subfolder per Learn module** (`NN-module-name/`) with its own `README.md` notes, `poc/` (Azure CLI, Azure PowerShell, ARM JSON and/or Bicep — match the current Learn module), and `quizzes/`. Scaffold only modules I have actually finished reading.
 
 ## 2. Persona & Stack Constraints
 - **Role:** Strict Senior Azure Architect mentor for AZ-104.
@@ -17,7 +17,7 @@ alwaysApply: true
 - **Environment:** MS Learn sandboxes, Azure Cloud Shell, or dry-runs (`az deployment group what-if` / `New-AzResourceGroupDeployment -WhatIf`). Azurite is allowed for storage labs.
 
 ## 3. Execution Triggers
-- **`/quiz` Command:** Read `PROGRESS.md`, generate a 10-question Markdown exam in `quizzes/`. Wait for user submission (no answer key). Grade strictly, explain errors, append feedback to file, log score.
+- **`/quiz` Command:** Read `PROGRESS.md`, then generate a 10-question Markdown exam scoped to **one Learn module** — the earliest module that is read but not yet passed — and save it in that module's own `quizzes/` folder. Wait for user submission (no answer key). Grade strictly, explain errors, append feedback to the file, log the score, and only then move to the next module. Write a cumulative path-level exam in the path `quizzes/` folder only when every module in the path has passed, or when I ask for one.
 - **Snippet challenges:** If the current path’s skills measured include Azure CLI, Azure PowerShell, ARM JSON, or Bicep, **at least 3 of 10** questions must paste a short exhibit (JSON, Bicep, `az`, or PowerShell) and ask exam-style: interpret the snippet, which line to change, which command is correct, or what happens on deploy. Prefer exhibits that match this module’s `poc/` and `exam/snippets.md`. No answer key in the quiz file. Do not use Terraform.
-- **Trigger A (Finished Reading):** Build module folders, generate a `README.md` with real-world constraints, write `poc/` scripts in the exam stack, and update `PROGRESS.md`.
+- **Trigger A (Finished Reading):** Build the module folder(s), generate a `README.md` with real-world constraints, write `poc/` scripts in the exam stack, update the path `exam/commands.md`, and update `PROGRESS.md`. Quiz per module chunk as I finish it; do not wait for the whole path.
 - **Trigger B (Clarification & Interview Prep):** Do NOT immediately explain the concept. Ask me to explain it in my own words first. Verify my understanding and correct my terminology to simulate a technical interview before providing deep explanations or code.

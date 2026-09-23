@@ -17,7 +17,8 @@ Layout: path 01 is a single folder (2 modules). Path 02 onward uses **one subfol
   - Quiz 2 (2026-09-21): **10/10 (100%) PASS** — prior misses closed; path checked off
   - Quiz 3 snippets (2026-09-21): **10/10 (100%) PASS** — CLI/ARM/Bicep exhibits closed
 - [ ] **02 Manage identities and governance in Azure** — 3 of 6 modules read, 3 passed
-  - [x] Module 1 Understand Microsoft Entra ID — read 2026-09-22; Quiz 1 **10/10 (100%) PASS**
+  - Interview modules 1–3 (2026-09-23, cold — notes not read): **3/6 (50%) NEEDS REVIEW**. Gaps: Entra ID flat-vs-hierarchical and Microsoft Graph not raised; Entra Domain Services trade-offs unnamed; tenant↔subscription asymmetry explained as a use case instead of the identity boundary; role-assignment-to-object-ID mechanism missing; AU answer omitted `User Administrator` scoping, P1-for-the-scoped-admin, and the group-object-vs-members distinction; **Assigned → Dynamic conversion inverted — believed manual members are retained**; per-hop inheritance (RBAC/Policy/locks) not enumerated; region pair described as a deployment choice rather than a platform property; no RTO/RPO discovery.
+  - [x] Module 1 Understand Microsoft Entra ID — read 2026-09-22; Quiz 1 **10/10 (100%) PASS**; notes re-read 2026-09-23; Quiz 2 (hard format, balanced distractors) **10/10 (100%) PASS** — interview gaps for this module closed
   - [x] Module 2 Create, configure, and manage identities — read 2026-09-22; Quiz 1 **10/10 (100%) PASS**
   - [x] Module 3 Describe the core architectural components of Azure — read 2026-09-22; Quiz 1 8.5/10 (85%) FAIL; Quiz 2 **10/10 (100%) PASS**
   - [ ] Module 4 Azure Policy initiatives — not started
@@ -39,3 +40,5 @@ Layout: path 01 is a single folder (2 modules). Path 02 onward uses **one subfol
 | 2026-09-22 | 02 Module 2 Create/manage identities — Quiz 1 | 10/10 (100%) | PASS |
 | 2026-09-22 | 02 Module 3 Core architecture — Quiz 1 | 8.5/10 (85%) | FAIL — NEEDS REVIEW |
 | 2026-09-22 | 02 Module 3 Core architecture — Quiz 2 | 10/10 (100%) | PASS |
+| 2026-09-23 | 02 Modules 1–3 — verbal interview (cold) | 3/6 (50%) | FAIL — NEEDS REVIEW |
+| 2026-09-23 | 02 Module 1 Understand Entra ID — Quiz 2 (hard format) | 10/10 (100%) | PASS |

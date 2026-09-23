@@ -9,7 +9,7 @@ This is the **largest exam domain: 20–25%** of AZ-104. It is also the domain w
 | # | Learn module | Folder | Read | Quiz |
 | --- | --- | --- | --- | --- |
 | 1 | Understand Microsoft Entra ID | `01-understand-entra-id/` | ✅ 2026-09-22 | ✅ 10/10 |
-| 2 | Create, configure, and manage identities | `02-create-configure-manage-identities/` | ✅ 2026-09-22 | ✅ 10/10 |
+| 2 | Create, configure, and manage identities | `02-create-configure-manage-identities/` | ✅ 2026-09-22 | ✅ 10/10; ✅ 9/10 (hard) |
 | 3 | Describe the core architectural components of Azure | `03-core-architectural-components/` | ✅ 2026-09-22 | ✅ 10/10 (retake) |
 | 4 | Azure Policy initiatives | — | ⬜ | — |
 | 5 | Secure your Azure resources with Azure RBAC | — | ⬜ | — |

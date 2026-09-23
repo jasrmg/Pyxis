@@ -54,19 +54,105 @@ Constraints to memorize:
 - Dynamic rules evaluate **attributes of users or devices** — you cannot build a dynamic rule whose members are **groups**.
 - A single dynamic group is **either** user-based **or** device-based, never both.
 - **Microsoft 365 groups support Dynamic User, not Dynamic Device.**
-- Converting a group from Assigned to Dynamic **discards existing manual members** — the rule becomes the source of truth.
-- Nesting: a group can contain a group. Azure **RBAC honors nesting**, and so does group-based licensing. Dynamic membership does not produce nested groups.
+- Converting a group from Assigned to Dynamic is **discard-then-repopulate**, not a filter applied in place. Entra **throws away the entire manual member list**, then evaluates the rule and builds membership from scratch. So:
+  - someone who **matches** the rule ends up in the group (they appear to "stay");
+  - someone who **does not match** is gone;
+  - the **original list is not recoverable** — there is no undo, so a wrong rule cannot be rolled back to the old 400 names;
+  - **hand-maintained exceptions are lost permanently** (the contractor you had added to `Finance` whose `department` says something else);
+  - the rule is now the only source of truth — you can no longer add a member by hand.
+- **Nesting:** a group can contain a group, but the two consumers disagree about whether they follow it, and the exam knows it:
+  - **Azure RBAC honours nesting** — a user inside a nested group receives the role assigned to the parent.
+  - **Group-based licensing does *not*** — only **first-level user members** of the licensed group are processed. Users who are only members of a nested child group get **no license**.
+  - Dynamic rules cannot target groups, so a dynamic group never produces nesting.
 - `isAssignableToRole` (role-assignable groups) must be set **at creation** and cannot be changed later; those groups also cannot be dynamic.
 
 ## Administrative units
 
-An **AU** scopes an admin role to a **subset** of the directory — the closest thing Entra ID has to an OU, but for **delegation only**, not policy.
+### In one sentence
 
-- Example: make someone **User Administrator** over just the "Manila Branch" AU, so they can reset passwords for that branch and nowhere else.
+An **administrative unit (AU)** is a container that limits **which directory objects an administrator is allowed to administer**.
+
+Hold it next to a security group, because they are easy to confuse:
+
+| | Answers the question |
+| --- | --- |
+| **Security group** | "Who gets **access** to this resource?" |
+| **Administrative unit** | "Which objects is this **admin allowed to manage**?" |
+
+Mental picture: the directory is a company phone book with 5,000 people. A Global Administrator can edit any page. An AU tears out the Manila pages and says *"Maria handles password resets for these pages, and nowhere else."*
+
+### The two populations — do not merge them
+
+This is the part that trips everyone up. An AU story always has **two separate casts**:
+
+| | Who they are | What they need |
+| --- | --- | --- |
+| **AU members** | The **targets** — the users, groups, or devices being administered | Nothing beyond **Free** |
+| **The scoped admin** | Someone given a **role assignment scoped to the AU** | **P1** |
+
+Consequences:
+
+- The admin **does not have to be a member of the AU**. Maria can sit outside the Manila AU and still administer it.
+- Putting Maria *into* the AU grants her **nothing**. Without a scoped role assignment she is just another target.
+- P1 is counted for the **admins you delegate to**, not for the hundreds of people they manage. That is what makes AUs cheap at scale.
+
+### Mechanics
+
 - AU members can be **users, groups, or devices**.
-- **Licensing:** the scoped **administrator** needs **P1**; the AU **members** only need Free.
+- You assign a **role scoped to the AU**, not to the tenant. Common AU-scopable roles: **User Administrator**, **Password Administrator**, **Helpdesk Administrator**, **Authentication Administrator**, **Groups Administrator**, **License Administrator**, **Cloud Device Administrator**.
+- **Not every role can be AU-scoped.** Global Administrator cannot — it is tenant-wide by definition.
+- An object can belong to **more than one** AU.
 - **Dynamic AUs** support **users or devices, not both, and not groups**.
-- **Adding a group to an AU scopes the group object, not the group's members.** A scoped admin can rename the group or change its membership, but cannot manage those users' own properties unless the users are also AU members. This distinction is a favorite exam question.
+- AUs are for **delegation only**. They are **not** OUs: no Group Policy, no policy application, and they are **not** security principals — you cannot grant an AU access to an Azure resource.
+
+### An AU narrows an assignment — it is **not** a fence around the objects
+
+The single most confusing thing about AUs. Scoping a role to an AU modifies **that one role assignment** ("Maria's User Administrator applies here and nowhere else"). It does **not** mark the member objects as protected.
+
+Entra permissions are **additive, and there is no deny**. Effective rights are the **union** of every role assignment a person holds, so an AU can never subtract from a tenant-wide grant.
+
+Worked example — the `Cebu` AU holds 80 users:
+
+| Person | Assignment | Can they reset a Cebu user's password? |
+| --- | --- | --- |
+| Maria | `User Administrator` **scoped to the `Cebu` AU** | ✅ — and nowhere outside the AU |
+| Ben | `Helpdesk Administrator` **tenant-wide**, and also happens to be an AU *member* | ✅ — everywhere, Cebu included. The AU does not constrain him. |
+
+Ben's AU membership makes him a **target**, not a restricted admin.
+
+**Exam consequence:** if a question asks how to *stop* someone from managing certain users, "put those users in an administrative unit" is **wrong**. You must **remove or narrow that person's tenant-wide assignment**. Same shape as an inherited RBAC assignment that cannot be cancelled at the child — you fix it where it was granted.
+
+### Adding a *group* to an AU — the favourite exam question
+
+Whatever object you put in the AU is the thing the scoped admin may administer.
+
+- Put a **user** in → the admin can reset that user's password and edit that user's properties.
+- Put a **group** in → the object being administered is **the group itself**: rename it, change its description, add and remove members, delete it. The users *inside* that group are **separate directory objects that are not AU members**, so the admin has no authority over them.
+
+Worked example. The `Manila` AU contains the group `Manila-Staff`, but not the 200 users in it:
+
+| Action by the AU-scoped User Administrator | Allowed? |
+| --- | --- |
+| Rename `Manila-Staff` | ✅ |
+| Add or remove members of `Manila-Staff` | ✅ |
+| Reset the password of a user in `Manila-Staff` | ❌ — the user is not an AU member |
+| Edit the job title of a user in `Manila-Staff` | ❌ — same reason |
+
+Flip it — the 200 **users** are AU members but the group is not — and the admin can reset every password but cannot modify the group. **Need both? Both have to be members.**
+
+### More examples of where an AU is the right answer
+
+1. **Regional helpdesk.** Manila helpdesk resets passwords for Manila employees only. AU of Manila **users**, `Password Administrator` scoped to it, P1 for the two helpdesk staff.
+2. **University faculties.** Each faculty's own IT team manages that faculty's students. One AU per faculty, `User Administrator` scoped per AU. Nobody can touch another faculty.
+3. **Post-acquisition integration.** The acquired company's admins must keep managing their own people while everyone lives in one tenant. AU of the acquired users, scoped `User Administrator` to their existing admins, no tenant-wide rights.
+4. **Delegating group ownership without user rights.** A team lead should maintain a set of project groups but must never reset a password. AU containing only the **groups**, `Groups Administrator` scoped to it. The group-object-only behaviour is the *feature* here, not the trap.
+5. **Site-based device management.** Devices at one campus are managed locally. Dynamic AU on a device attribute, `Cloud Device Administrator` scoped to it — remember a dynamic AU is users **or** devices, never both.
+
+### When an AU is the *wrong* answer
+
+- You need to grant access to an Azure resource → **security group** with an RBAC assignment.
+- You need to apply configuration or policy to machines → **Intune**, or Group Policy via Entra Domain Services / AD DS.
+- You need the admin limited by *resource* scope rather than *directory object* scope → that is **Azure RBAC** at a management group, subscription, or resource group.
 
 ## Device registration
 
@@ -143,7 +229,7 @@ A user is deleted on Friday. On Monday you can **restore** them from deleted use
 3. **Synced** users are edited on-premises, not in the cloud.
 4. Dynamic membership = **P1**. Group-based licensing = **P1**. Administrative-unit admins = **P1**.
 5. Dynamic groups cannot target **groups**, and cannot mix **users and devices**.
-6. Converting Assigned → Dynamic **wipes manual members**.
+6. Converting Assigned → Dynamic **discards the manual list and repopulates from the rule** — matching users return, non-matching users are dropped, and the old list cannot be restored.
 7. `isAssignableToRole` is set **at creation only** and excludes dynamic membership.
 8. Adding a **group** to an AU scopes the **group object**, not its members.
 9. Custom security attributes need their own roles; **Global Admin is not automatically included**.

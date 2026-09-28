@@ -1,6 +1,6 @@
 # Path 02 — Commands (Azure CLI ↔ Azure PowerShell)
 
-Scope: **modules 1–3**. Grows as modules 4–6 (Policy, RBAC, SSPR) land.
+Scope: **modules 1–4**. Grows as modules 5–6 (RBAC, SSPR) land.
 
 Same rule as path 01: do not memorize every switch. Memorize the **noun and the verb**, and which tool can do a thing at all.
 
@@ -103,6 +103,19 @@ Tags are **not inherited** by default — a resource does not automatically get 
 | Delete | `az account management-group delete --name mg-prod` | `Remove-AzManagementGroup -GroupName mg-prod` |
 
 `--name` on a management group is the **ID/name**, not the display name. `az account management-group show` says so explicitly. Passing the display name is a common failure.
+
+## Azure Policy (module 4)
+
+| Job | Azure CLI | Azure PowerShell |
+| --- | --- | --- |
+| Assign a definition | `az policy assignment create --name allowed-loc --scope <scope> --policy <defId>` | `New-AzPolicyAssignment -Name allowed-loc -Scope <scope> -PolicyDefinition <obj>` |
+| Assign an initiative | `az policy assignment create --name guardrails --scope <scope> --policy-set-definition <setId>` | `New-AzPolicyAssignment -Name guardrails -Scope <scope> -PolicySetDefinition <obj>` |
+| DoNotEnforce | add `--enforcement-mode DoNotEnforce` | `-EnforcementMode DoNotEnforce` |
+| Identity for modify/DINE | `--mi-system-assigned --location eastus` | `-IdentityType SystemAssigned -Location eastus` |
+| Remediate | `az policy remediation create --name fix-tags --policy-assignment <name>` | `Start-AzPolicyRemediation -Name fix-tags -PolicyAssignmentId <id>` |
+| List assignments | `az policy assignment list --scope <scope>` | `Get-AzPolicyAssignment -Scope <scope>` |
+
+After `--mi-system-assigned`, grant the assignment's principal a role (e.g. Tag Contributor) at that scope. The identity existing is not permission.
 
 ## Regions / limits
 

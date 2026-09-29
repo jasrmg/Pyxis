@@ -23,7 +23,7 @@ Layout: path 01 is a single folder (2 modules). Path 02 onward uses **one subfol
   - [x] Module 1 Understand Microsoft Entra ID — read 2026-09-22; Quiz 1 **10/10 (100%) PASS**; notes re-read 2026-09-23; Quiz 2 (hard format, balanced distractors) **10/10 (100%) PASS** — interview gaps for this module closed
   - [x] Module 2 Create, configure, and manage identities — read 2026-09-22; Quiz 1 **10/10 (100%) PASS**; notes re-read 2026-09-23; Quiz 2 (hard format) **9/10 (90%) PASS** — miss was nested group-based licensing vs nested RBAC; AU / conversion interview gaps closed
   - [x] Module 3 Describe the core architectural components of Azure — read 2026-09-22; Quiz 1 8.5/10 (85%) FAIL; Quiz 2 **10/10 (100%) PASS**; notes re-read 2026-09-27; Quiz 3 (hard format) **9/10 (90%) PASS** — miss: exhibit still applied tag inheritance to a child resource (location correct, tags wrong)
-  - [x] Module 4 Azure Policy initiatives — read 2026-09-28; Quiz 1 8/10 (80%) FAIL; notes written; Quiz 2 **9/10 (90%) PASS** — miss: Indexed still evaluates tagged resources (RGs are the skip); append/modify reason inverted
+  - Policy verbal (2026-09-29): **3/4 (75%) PASS with nits**. Closed: initiative at MG, DoNotEnforce then Default, remediation, mode vs enforcementMode, Indexed skips RG, `notScopes` vs dated exemption, effect order, append/modify mutate before deny, parent Deny not canceled. Still sloppy: said **exemption** produces the compliance count (that is DoNotEnforce); did not punch "only the **assignment** evaluates"; VM "gets tagged" assumed modify (deny would reject the create); role named as Contributor instead of **Tag Contributor**; answered "RG won't be created" when the denied object was the **NIC**.
   - [ ] Module 5 Secure your Azure resources with Azure RBAC — not started
   - [ ] Module 6 Entra self-service password reset (SSPR) — not started
 - [ ] **03 Implement and manage storage in Azure**
@@ -49,3 +49,4 @@ Layout: path 01 is a single folder (2 modules). Path 02 onward uses **one subfol
 | 2026-09-27 | 02 Modules 1–3 — verbal interview (retake) | 4/6 (67%) | FAIL — NEEDS REVIEW — AU fence + group-scoping still inverted |
 | 2026-09-28 | 02 Module 4 Azure Policy initiatives — Quiz 1 | 8/10 (80%) | FAIL — NEEDS REVIEW |
 | 2026-09-28 | 02 Module 4 Azure Policy initiatives — Quiz 2 | 9/10 (90%) | PASS — miss: Indexed vs resource groups |
+| 2026-09-29 | 02 Module 4 — Policy verbal | 3/4 (75%) | PASS with nits — exemption≠compliance count; assignment evaluates |

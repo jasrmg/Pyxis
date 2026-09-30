@@ -12,7 +12,7 @@ This is the **largest exam domain: 20–25%** of AZ-104. It is also the domain w
 | 2 | Create, configure, and manage identities | `02-create-configure-manage-identities/` | ✅ 2026-09-22 | ✅ 10/10; ✅ 9/10 (hard) |
 | 3 | Describe the core architectural components of Azure | `03-core-architectural-components/` | ✅ 2026-09-22 | ✅ 10/10 (retake); ✅ 9/10 (hard) |
 | 4 | Azure Policy initiatives | `04-azure-policy-initiatives/` | ✅ 2026-09-28 | Quiz 1 8/10 FAIL; ✅ 9/10 (hard) |
-| 5 | Secure your Azure resources with Azure RBAC | `05-secure-resources-rbac/` | ✅ 2026-09-30 | Quiz 1 8/10 FAIL |
+| 5 | Secure your Azure resources with Azure RBAC | `05-secure-resources-rbac/` | ✅ 2026-09-30 | Quiz 1 8/10 FAIL; Quiz 2 7/10 FAIL |
 | 6 | Allow users to reset their password with Entra SSPR | — | ⬜ | — |
 
 Folders are scaffolded only for modules you have finished.

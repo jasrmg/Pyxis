@@ -1,6 +1,6 @@
 # Path 02 — Commands (Azure CLI ↔ Azure PowerShell)
 
-Scope: **modules 1–4**. Grows as modules 5–6 (RBAC, SSPR) land.
+Scope: **modules 1–5**. Grows as module 6 (SSPR) lands.
 
 Same rule as path 01: do not memorize every switch. Memorize the **noun and the verb**, and which tool can do a thing at all.
 
@@ -117,6 +117,18 @@ Tags are **not inherited** by default — a resource does not automatically get 
 
 After `--mi-system-assigned`, grant the assignment's principal a role (e.g. Tag Contributor) at that scope. The identity existing is not permission.
 
+## Azure RBAC (module 5)
+
+| Job | Azure CLI | Azure PowerShell |
+| --- | --- | --- |
+| Assign | `az role assignment create --assignee <upn> --role Reader --scope <scope>` | `New-AzRoleAssignment -SignInName <upn> -RoleDefinitionName Reader -Scope <scope>` |
+| List (this scope) | `az role assignment list --scope <scope>` | `Get-AzRoleAssignment -Scope <scope>` |
+| List + inherited | `az role assignment list --scope <scope> --include-inherited` | `Get-AzRoleAssignment -Scope <scope>` (includes inherited) |
+| Delete | `az role assignment delete --ids <id>` | `Remove-AzRoleAssignment -ObjectId <id> -RoleDefinitionName Reader -Scope <scope>` |
+| Role definitions | `az role definition list --name Contributor` | `Get-AzRoleDefinition -Name Contributor` |
+
+Who may assign: **Owner** or **User Access Administrator** at that scope. Contributor cannot.
+
 ## Regions / limits
 
 | Job | Command |
@@ -133,3 +145,4 @@ After `--mi-system-assigned`, grant the assignment's principal a role (e.g. Tag 
 | `az tag update --operation Replace` to add one tag | Replace **removes** tags you did not list; you wanted `Merge` |
 | `az account management-group create --name "Corp Prod"` | `--name` is the ID; display name goes in `--display-name` |
 | `az group create` nested inside another RG | Resource groups cannot be nested |
+| `az role assignment create --role Contributor` so someone can grant access | Contributor **cannot** assign roles; you wanted Owner or User Access Administrator |

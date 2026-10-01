@@ -16,7 +16,7 @@ Layout: path 01 is a single folder (2 modules). Path 02 onward uses **one subfol
   - Quiz 1 (2026-09-21): 7/10 (70%) FAIL — NEEDS REVIEW
   - Quiz 2 (2026-09-21): **10/10 (100%) PASS** — prior misses closed; path checked off
   - Quiz 3 snippets (2026-09-21): **10/10 (100%) PASS** — CLI/ARM/Bicep exhibits closed
-- [ ] **02 Manage identities and governance in Azure** — 5 of 6 modules read, 4 passed
+- [ ] **02 Manage identities and governance in Azure** — 5 of 6 modules read, 5 passed
   - Interview modules 1–3 (2026-09-23, cold): **3/6 (50%) NEEDS REVIEW**
   - Interview modules 1–3 (2026-09-27, after notes + hard quizzes): **4/6 (67%) NEEDS REVIEW**. Closed since cold pass: authn/authz split, Domain Services killers (schema + two-way trust), discard-then-repopulate, nested licensing vs nested RBAC, VM untagged + mixed region, Policy `modify` vs Cost Management. Still open after that paper: object-ID mechanism, region pair as product, RTO/RPO.
   - AU verbal drill (2026-09-27): **4/4 PASS** — group-object-vs-members and AU-is-not-a-fence both closed after a restatement. Exam wording to keep: role is `Password Administrator` or `User Administrator` **scoped to the AU**; stop Ben by changing **his assignment**, not the AU membership.
@@ -25,7 +25,7 @@ Layout: path 01 is a single folder (2 modules). Path 02 onward uses **one subfol
   - [x] Module 3 Describe the core architectural components of Azure — read 2026-09-22; Quiz 1 8.5/10 (85%) FAIL; Quiz 2 **10/10 (100%) PASS**; notes re-read 2026-09-27; Quiz 3 (hard format) **9/10 (90%) PASS** — miss: exhibit still applied tag inheritance to a child resource (location correct, tags wrong)
   - [x] Module 4 Azure Policy initiatives — read 2026-09-28; Quiz 1 8/10 (80%) FAIL; notes written; Quiz 2 **9/10 (90%) PASS** — miss: Indexed still evaluates tagged resources (RGs are the skip); append/modify reason inverted
   - Policy verbal (2026-09-29): **3/4 (75%) PASS with nits**. Closed: initiative at MG, DoNotEnforce then Default, remediation, mode vs enforcementMode, Indexed skips RG, `notScopes` vs dated exemption, effect order, append/modify mutate before deny, parent Deny not canceled. Still sloppy: said **exemption** produces the compliance count (that is DoNotEnforce); did not punch "only the **assignment** evaluates"; VM "gets tagged" assumed modify (deny would reject the create); role named as Contributor instead of **Tag Contributor**; answered "RG won't be created" when the denied object was the **NIC**.
-  - [ ] Module 5 Secure your Azure resources with Azure RBAC — read 2026-09-30; Quiz 1 8/10 (80%) FAIL; Quiz 2 **7/10 (70%) FAIL — NEEDS REVIEW** — Q4 blanks 2–4 unanswered; DataActions still apply at subscription scope; `az policy assignment list` is not RBAC
+  - RBAC verbal (2026-10-01): **3.5/4 (88%) PASS with nits**. Closed: triple (principal is the right word); VM Contributor at RG; GA has no Azure access until elevate; elevate = UAA at root MG then assign then turn off; Blob Data Reader on MI vs Azure Reader on operators; inherited assignment not deletable at child; policy list ≠ RBAC. Nits: best-practice principal is a **group**; Contributor is the wrong **role** as well as the wrong scope; Azure **Reader** on the MI does **not** download — only ARM visibility.
   - [ ] Module 6 Entra self-service password reset (SSPR) — not started
 - [ ] **03 Implement and manage storage in Azure**
 - [ ] **04 Deploy and manage Azure compute resources**
@@ -53,3 +53,6 @@ Layout: path 01 is a single folder (2 modules). Path 02 onward uses **one subfol
 | 2026-09-29 | 02 Module 4 — Policy verbal | 3/4 (75%) | PASS with nits — exemption≠compliance count; assignment evaluates |
 | 2026-09-30 | 02 Module 5 Azure RBAC — Quiz 1 | 8/10 (80%) | FAIL — NEEDS REVIEW |
 | 2026-09-30 | 02 Module 5 Azure RBAC — Quiz 2 | 7/10 (70%) | FAIL — NEEDS REVIEW |
+| 2026-10-01 | 02 Module 5 Azure RBAC — Quiz 3 | 8/10 (80%) | FAIL — NEEDS REVIEW |
+| 2026-10-01 | 02 Module 5 Azure RBAC — Quiz 4 | 10/10 (100%) | PASS |
+| 2026-10-01 | 02 Module 5 — RBAC verbal | 3.5/4 (88%) | PASS with nits |

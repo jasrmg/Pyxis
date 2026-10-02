@@ -1,6 +1,6 @@
 # Path 02 — Commands (Azure CLI ↔ Azure PowerShell)
 
-Scope: **modules 1–5**. Grows as module 6 (SSPR) lands.
+Scope: **modules 1–6** (Path 02 complete once module 6 is passed).
 
 Same rule as path 01: do not memorize every switch. Memorize the **noun and the verb**, and which tool can do a thing at all.
 
@@ -128,6 +128,20 @@ After `--mi-system-assigned`, grant the assignment's principal a role (e.g. Tag 
 | Role definitions | `az role definition list --name Contributor` | `Get-AzRoleDefinition -Name Contributor` |
 
 Who may assign: **Owner** or **User Access Administrator** at that scope. Contributor cannot.
+
+## Entra SSPR (module 6)
+
+There is **no** `az ad sspr enable`. Configure in **Entra admin center → Password reset**.
+
+| Blade | Job |
+| --- | --- |
+| Properties | None / Selected (pilot group) / All |
+| Authentication methods | 1 or 2 methods to reset; which methods |
+| Registration | Register on sign-in; reconfirm interval |
+| Notifications | User's own reset; admins when an admin is reset |
+| On-premises integration | Password writeback; unlock without reset |
+
+Writeback also needs **Password writeback** enabled in **Microsoft Entra Connect**. Hybrid writeback = **P1**. Admins: two methods, no security questions.
 
 ## Regions / limits
 

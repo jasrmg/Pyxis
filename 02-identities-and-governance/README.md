@@ -13,7 +13,7 @@ This is the **largest exam domain: 20–25%** of AZ-104. It is also the domain w
 | 3 | Describe the core architectural components of Azure | `03-core-architectural-components/` | ✅ 2026-09-22 | ✅ 10/10 (retake); ✅ 9/10 (hard) |
 | 4 | Azure Policy initiatives | `04-azure-policy-initiatives/` | ✅ 2026-09-28 | Quiz 1 8/10 FAIL; ✅ 9/10 (hard) |
 | 5 | Secure your Azure resources with Azure RBAC | `05-secure-resources-rbac/` | ✅ 2026-09-30 | Quiz 1–3 FAIL; ✅ 10/10 (quiz 4) |
-| 6 | Allow users to reset their password with Entra SSPR | — | ⬜ | — |
+| 6 | Allow users to reset their password with Entra SSPR | `06-entra-sspr/` | ✅ 2026-10-02 | Quiz 1 8/10 FAIL; ✅ 9/10 |
 
 Folders are scaffolded only for modules you have finished.
 

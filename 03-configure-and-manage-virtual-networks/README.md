@@ -8,7 +8,7 @@ This is **20–25%** of AZ-104 (virtual networking). Wrong answers are usually *
 
 | # | Learn module | Folder | Read | Quiz |
 | --- | --- | --- | --- | --- |
-| 1 | Configure virtual networks | `01-configure-virtual-networks/` | ✅ 2026-10-03 | ✅ Quiz 3 9/10 |
+| 1 | Configure virtual networks | `01-configure-virtual-networks/` | ✅ 2026-10-03 | ✅ Quiz 3 9/10; verbal 4/4 |
 | 2 | Configure network security groups | — | ⬜ | — |
 | 3 | Host your domain on Azure DNS | — | ⬜ | — |
 | 4 | Configure Azure Virtual Network peering | — | ⬜ | — |

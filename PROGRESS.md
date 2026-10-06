@@ -28,9 +28,9 @@ Layout: path 01 is a single folder (2 modules). Path 02 onward uses **one subfol
   - Policy verbal (2026-09-29): **3/4 (75%) PASS with nits**. Closed: initiative at MG, DoNotEnforce then Default, remediation, mode vs enforcementMode, Indexed skips RG, `notScopes` vs dated exemption, effect order, append/modify mutate before deny, parent Deny not canceled. Still sloppy: said **exemption** produces the compliance count (that is DoNotEnforce); did not punch "only the **assignment** evaluates"; VM "gets tagged" assumed modify (deny would reject the create); role named as Contributor instead of **Tag Contributor**; answered "RG won't be created" when the denied object was the **NIC**.
   - RBAC verbal (2026-10-01): **3.5/4 (88%) PASS with nits**. Closed: triple (principal is the right word); VM Contributor at RG; GA has no Azure access until elevate; elevate = UAA at root MG then assign then turn off; Blob Data Reader on MI vs Azure Reader on operators; inherited assignment not deletable at child; policy list ≠ RBAC. Nits: best-practice principal is a **group**; Contributor is the wrong **role** as well as the wrong scope; Azure **Reader** on the MI does **not** download — only ARM visibility.
   - SSPR verbal (2026-10-02): **3.5/4 (88%) PASS with nits**. Closed: None/Selected/All; P1+writeback for hybrid; reset 1 or 2; Lea cannot with one method when two required; admins no security questions; test non-admin; writeback off = cloud only. Nits: name **both** writeback places (Connect **and** SSPR On-premises integration); admins need **two** methods even if tenant policy is 1; unlock-without-reset clears an **AD lockout**, it is not a general “log in without a password.”
-- [ ] **03 Configure and manage virtual networks for Azure administrators** — 1 of 8 modules read
+- [ ] **03 Configure and manage virtual networks for Azure administrators** — 2 of 8 modules read
   - [x] Module 1 Configure virtual networks — read 2026-10-03; Quiz 1 6/10 FAIL; Quiz 2 7/10 FAIL; Quiz 3 **9/10 (90%) PASS**; verbal (2026-10-04) **4/4 PASS with nits** — `/22` containment closed; reserved five-per-subnet named; assigned vs created/associated; legal create order. Nit: still say **NIC IP config** as the associate target and set private **static** on that config.
-  - [ ] Module 2 Configure network security groups — not started
+  - [x] Module 2 Configure network security groups — read 2026-10-06; Quiz 1 7/10 FAIL; Quiz 2 **10/10 (100%) PASS**; verbal (2026-10-06) **4/4 PASS** — first-match stop; DenyAllInbound vs internet; inbound subnet then NIC; ASG on NIC, one VNet
   - [ ] Module 3 Host your domain on Azure DNS — not started
   - [ ] Module 4 Configure Azure Virtual Network peering — not started
   - [ ] Module 5 Routes — not started
@@ -73,3 +73,6 @@ Layout: path 01 is a single folder (2 modules). Path 02 onward uses **one subfol
 | 2026-10-04 | 03 Module 1 Configure virtual networks — Quiz 2 | 7/10 (70%) | FAIL — NEEDS REVIEW |
 | 2026-10-04 | 03 Module 1 Configure virtual networks — Quiz 3 | 9/10 (90%) | PASS — miss: `/22` range right, containment Yes inverted |
 | 2026-10-04 | 03 Module 1 — VNet verbal | 4/4 (100%) | PASS with nits — name NIC IP config |
+| 2026-10-06 | 03 Module 2 Configure NSGs — Quiz 1 | 7/10 (70%) | FAIL — NEEDS REVIEW |
+| 2026-10-06 | 03 Module 2 Configure NSGs — Quiz 2 | 10/10 (100%) | PASS |
+| 2026-10-06 | 03 Module 2 — NSG verbal | 4/4 (100%) | PASS |

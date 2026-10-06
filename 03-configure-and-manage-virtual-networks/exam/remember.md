@@ -54,3 +54,12 @@ Worked: quiz overlap — `10.0.1.128/25` vs `10.0.1.0/24`
 Containment test (do this, not `2^n − 5`): write both ranges. If they share any address, they overlap. A subnet must sit **entirely inside** the VNet prefix.
 
 The `− 5` is **per subnet after you carve it**. Do not subtract it from the VNet prefix when checking whether a subnet fits.
+
+## NSG (module 2)
+
+- Associate to **subnet** or **NIC**, not the VM or the VNet. One NSG per subnet; zero or one per NIC; one NSG may attach many times.
+- Priority **100–4096**. **Lower number first.** First match stops. Defaults cannot be deleted (65000 / 65001 / 65500).
+- Inbound internet = **denied** until a custom Allow. Outbound internet = **allowed**.
+- Inbound effective: **subnet NSG then NIC NSG** (both must allow). Outbound: **NIC then subnet**.
+- ASG = label on NICs in **one VNet**. The **NSG rule** names the ASG. ASG is not a firewall.
+

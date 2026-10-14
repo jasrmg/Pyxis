@@ -1,6 +1,7 @@
 # AZ-104 Progress
 
 Track: Azure Administrator (AZ-104)  
+Exam contract: [Skills Measured](https://learn.microsoft.com/en-us/credentials/certifications/resources/study-guides/az-104) as of **17 Apr 2026** — snapshot `AZ104-SKILLS.md`. Pearson pass **700**.  
 Tooling: Azure portal, Azure CLI, Azure PowerShell, ARM templates, Bicep. No Terraform.  
 Environment: MS Learn sandboxes, Azure Cloud Shell, or `az deployment group what-if` / `New-AzResourceGroupDeployment -WhatIf`. Azurite for storage labs.
 

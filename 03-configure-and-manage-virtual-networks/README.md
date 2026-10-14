@@ -2,7 +2,7 @@
 
 Microsoft Learn path: [AZ-104: Configure and manage virtual networks for Azure administrators](https://learn.microsoft.com/en-us/training/paths/az-104-manage-virtual-networks/) — 8 modules.
 
-This is **20–25%** of AZ-104 (virtual networking). Wrong answers are usually **address-space**, **reserved IPs**, **which resource the IP is attached to**, or **NSG priority / associate target**.
+This is **15–20%** of AZ-104 (virtual networking; skills measured as of 17 Apr 2026). Wrong answers are usually **address-space**, **reserved IPs**, **which resource the IP is attached to**, or **NSG priority / associate target**. Snapshot: `AZ104-SKILLS.md` domain **4**.
 
 ## Module status
 

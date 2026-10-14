@@ -1,6 +1,6 @@
 # Path 03 — Commands (Azure CLI ↔ Azure PowerShell)
 
-Scope: **modules 1–2** (VNet/IP + NSG). Grows with DNS, peering, routes, LB.
+Scope: **modules 1–3** (VNet/IP + NSG + DNS). Grows with peering, routes, LB.
 
 ## Module 1 — VNet and IP
 
@@ -23,3 +23,15 @@ Scope: **modules 1–2** (VNet/IP + NSG). Grows with DNS, peering, routes, LB.
 | Associate to NIC | `az network nic update -g rg -n nic-web --network-security-group nsg-web` | `Set-AzNetworkInterface` |
 
 **Trap:** lower **priority number** wins. Defaults cannot be deleted. Associate subnet or NIC, not the VM.
+
+## Module 3 — Azure DNS
+
+| Job | Azure CLI | Azure PowerShell |
+| --- | --- | --- |
+| Public zone | `az network dns zone create -g rg -n contoso.com` | `New-AzDnsZone` |
+| A record | `az network dns record-set a add-record -g rg -z contoso.com -n www --ipv4-address 20.1.2.3` | `New-AzDnsRecordSet -RecordType A` |
+| Alias A to PIP | `az network dns record-set a create -g rg -z contoso.com -n "@" --target-resource <pip-id>` | alias target on the record set |
+| Private zone | `az network private-dns zone create -g rg -n private.contoso.com` | `New-AzPrivateDnsZone` |
+| VNet link + auto-reg | `az network private-dns link vnet create -g rg -n link1 -z private.contoso.com -v vnet-app -e true` | `New-AzPrivateDnsVirtualNetworkLink -EnableRegistration` |
+
+**Trap:** `dns` = public. `private-dns` = private. Azure DNS does **not** register the domain. CNAME ≠ apex; alias A/AAAA can be apex.

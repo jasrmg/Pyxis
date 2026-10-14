@@ -63,3 +63,11 @@ The `− 5` is **per subnet after you carve it**. Do not subtract it from the VN
 - Inbound effective: **subnet NSG then NIC NSG** (both must allow). Outbound: **NIC then subnet**.
 - ASG = label on NICs in **one VNet**. The **NSG rule** names the ASG. ASG is not a firewall.
 
+## Azure DNS (module 3)
+
+- Azure DNS **hosts**. A **registrar** sells the name. Delegate with **NS** at the registrar.
+- Zone create → **SOA + NS**. `www` in `contoso.com` = `www.contoso.com`. Apex = `@`.
+- **CNAME** cannot be apex. **Alias** A/AAAA/CNAME can track a Standard PIP, TM, CDN, Front Door. Alias **can** be apex.
+- Private zone: **VNet link**. Auto-reg = **A** on **primary NIC**; one registration zone per VNet. Not on the internet.
+- CLI: `az network dns` vs `az network private-dns`.
+

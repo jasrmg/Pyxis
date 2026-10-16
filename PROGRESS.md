@@ -32,7 +32,7 @@ Layout: path 01 is a single folder (2 modules). Path 02 onward uses **one subfol
 - [ ] **03 Configure and manage virtual networks for Azure administrators** — 3 of 8 modules read
   - [x] Module 1 Configure virtual networks — read 2026-10-03; Quiz 1 6/10 FAIL; Quiz 2 7/10 FAIL; Quiz 3 **9/10 (90%) PASS**; verbal (2026-10-04) **4/4 PASS with nits** — `/22` containment closed; reserved five-per-subnet named; assigned vs created/associated; legal create order. Nit: still say **NIC IP config** as the associate target and set private **static** on that config.
   - [x] Module 2 Configure network security groups — read 2026-10-06; Quiz 1 7/10 FAIL; Quiz 2 **10/10 (100%) PASS**; verbal (2026-10-06) **4/4 PASS** — first-match stop; DenyAllInbound vs internet; inbound subnet then NIC; ASG on NIC, one VNet
-  - [x] Module 3 Host your domain on Azure DNS — read 2026-10-14; Quiz 1 8/10 FAIL; Quiz 2 8/10 FAIL; Quiz 3 5/10 FAIL; Quiz 4 **9/10 (90%) PASS** — miss: Q9 E (auto-reg is VNet link, not PIP). Verbal pending.
+  - [x] Module 3 Host your domain on Azure DNS — read 2026-10-14; Quiz 1 8/10 FAIL; Quiz 2 8/10 FAIL; Quiz 3 5/10 FAIL; Quiz 4 **9/10 (90%) PASS**; verbal (2026-10-16) **3/4 (75%) PASS with nits** — Closed after restatement: auto-reg = **VNet link**, writes **A** (primary NIC private IPv4), `$false` = resolution-only. Still sloppy if you skip: apex on TM is **alias A/AAAA at `@` targeting TM**; paste NS **at the registrar**.
   - [ ] Module 4 Configure Azure Virtual Network peering — not started
   - [ ] Module 5 Routes — not started
   - [ ] Module 6 Azure Load Balancer — not started
@@ -81,3 +81,4 @@ Layout: path 01 is a single folder (2 modules). Path 02 onward uses **one subfol
 | 2026-10-14 | 03 Module 3 Azure DNS — Quiz 2 | 8/10 (80%) | FAIL — NEEDS REVIEW — miss: record set vs two sets; auto-reg A not PTR |
 | 2026-10-14 | 03 Module 3 Azure DNS — Quiz 3 | 5/10 (50%) | FAIL — NEEDS REVIEW — record set = name+type; EnableRegistration false; auto-reg is VNet link |
 | 2026-10-14 | 03 Module 3 Azure DNS — Quiz 4 | 9/10 (90%) | PASS — miss: Q9 auto-reg = VNet link not PIP association |
+| 2026-10-16 | 03 Module 3 — DNS verbal | 3/4 (75%) | PASS with nits — alias A at `@` to TM; NS at registrar; auto-reg = VNet link not NIC |

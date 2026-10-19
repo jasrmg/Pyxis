@@ -1,6 +1,6 @@
 # Path 03 — Commands (Azure CLI ↔ Azure PowerShell)
 
-Scope: **modules 1–3** (VNet/IP + NSG + DNS). Grows with peering, routes, LB.
+Scope: **modules 1–4** (VNet/IP + NSG + DNS + peering). Grows with routes, LB.
 
 ## Module 1 — VNet and IP
 
@@ -35,3 +35,15 @@ Scope: **modules 1–3** (VNet/IP + NSG + DNS). Grows with peering, routes, LB.
 | VNet link + auto-reg | `az network private-dns link vnet create -g rg -n link1 -z private.contoso.com -v vnet-app -e true` | `New-AzPrivateDnsVirtualNetworkLink -EnableRegistration` |
 
 **Trap:** `dns` = public. `private-dns` = private. Azure DNS does **not** register the domain. CNAME ≠ apex; alias A/AAAA can be apex.
+
+## Module 4 — VNet peering
+
+| Job | Azure CLI | Azure PowerShell |
+| --- | --- | --- |
+| Peer A → B | `az network vnet peering create -g rg -n a-to-b --vnet-name vnet-a --remote-vnet vnet-b --allow-vnet-access` | `Add-AzVirtualNetworkPeering` |
+| Peer B → A (required) | same, swap names | second `Add-AzVirtualNetworkPeering` |
+| Hub allows gateway transit | add `--allow-gateway-transit` | `-AllowGatewayTransit` |
+| Spoke uses hub gateway | add `--use-remote-gateways` | `-UseRemoteGateways` |
+| Accept NVA-forwarded packets | add `--allow-forwarded-traffic` | `-AllowForwardedTraffic` |
+
+**Trap:** two peering objects; both **Connected**. Non-overlapping CIDR. Not transitive. Hub = transit; spoke = remote gateway; spoke has no local gateway.

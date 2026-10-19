@@ -71,3 +71,13 @@ The `− 5` is **per subnet after you carve it**. Do not subtract it from the VN
 - Private zone: **VNet link**. Auto-reg = **A** on **primary NIC**; one registration zone per VNet. Not on the internet.
 - CLI: `az network dns` vs `az network private-dns`.
 
+## VNet peering (module 4)
+
+- Backbone, not internet. Not a VPN hop for VNet-to-VNet.
+- **Two** peerings; both **Connected**. One side = **Initiated** = not up.
+- Address spaces **must not overlap**.
+- **Not transitive.** Spoke-to-spoke needs another peering or UDR + NVA.
+- Hub: **Allow gateway transit**. Spoke: **Use remote gateways**. Spoke has **no** own gateway. Not Basic VPN SKU for transit.
+- **Allow forwarded traffic** permits NVA-forwarded packets; it does not create the UDR.
+- NSG still filters. `VirtualNetwork` includes the peer when access is allowed.
+

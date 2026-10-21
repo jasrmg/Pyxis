@@ -12,7 +12,7 @@ This is **15–20%** of AZ-104 (virtual networking; skills measured as of 17 Apr
 | 2 | Configure network security groups | `02-configure-network-security-groups/` | ✅ 2026-10-06 | ✅ Quiz 2 10/10; verbal 4/4 |
 | 3 | Host your domain on Azure DNS | `03-host-domain-azure-dns/` | ✅ 2026-10-14 | ✅ Quiz 4 9/10; verbal 3/4 nits |
 | 4 | Configure Azure Virtual Network peering | `04-configure-virtual-network-peering/` | ✅ 2026-10-19 | ✅ Quiz 2 10/10; verbal 4/4 |
-| 5 | Manage and control traffic flow with routes | — | ⬜ | — |
+| 5 | Manage and control traffic flow with routes | `05-control-network-traffic-flow-with-routes/` | ✅ 2026-10-21 | ✅ Quiz 1 10/10; verbal 4/4 |
 | 6 | Introduction to Azure Load Balancer | — | ⬜ | — |
 | 7 | Introduction to Azure Application Gateway | — | ⬜ | — |
 | 8 | Introduction to Azure Network Watcher | — | ⬜ | — |

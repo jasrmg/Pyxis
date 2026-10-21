@@ -1,6 +1,6 @@
 # Path 03 — Commands (Azure CLI ↔ Azure PowerShell)
 
-Scope: **modules 1–4** (VNet/IP + NSG + DNS + peering). Grows with routes, LB.
+Scope: **modules 1–5** (VNet/IP + NSG + DNS + peering + routes). Grows with LB.
 
 ## Module 1 — VNet and IP
 
@@ -47,3 +47,14 @@ Scope: **modules 1–4** (VNet/IP + NSG + DNS + peering). Grows with routes, LB.
 | Accept NVA-forwarded packets | add `--allow-forwarded-traffic` | `-AllowForwardedTraffic` |
 
 **Trap:** two peering objects; both **Connected**. Non-overlapping CIDR. Not transitive. Hub = transit; spoke = remote gateway; spoke has no local gateway.
+
+## Module 5 — Routes
+
+| Job | Azure CLI | Azure PowerShell |
+| --- | --- | --- |
+| Route table | `az network route-table create -g rg -n rt-app` | `New-AzRouteTable` |
+| UDR | `az network route-table route create -g rg --route-table-name rt-app -n to-nva --address-prefix 0.0.0.0/0 --next-hop-type VirtualAppliance --next-hop-ip-address 10.0.100.4` | `Add-AzRouteConfig` |
+| Associate to subnet | `az network vnet subnet update -g rg --vnet-name vnet-app -n snet-web --route-table rt-app` | `Set-AzVirtualNetworkSubnetConfig -RouteTable` |
+| NVA IP forwarding | `az network nic update -g rg -n nic-nva --ip-forwarding true` | `Set-AzNetworkInterface -EnableIPForwarding` |
+
+**Trap:** table → **subnet**, not NIC. Longest prefix first; same prefix UDR > BGP > system. NVA other subnet; forwarding NIC **and** OS. Next hop **None** = drop. No UDR next hop “peering.”

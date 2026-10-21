@@ -81,3 +81,11 @@ The `− 5` is **per subnet after you carve it**. Do not subtract it from the VN
 - **Allow forwarded traffic** permits NVA-forwarded packets; it does not create the UDR.
 - NSG still filters. `VirtualNetwork` includes the peer when access is allowed.
 
+## Routes (module 5)
+
+- Route table → **subnet** (zero or one). Not NIC/VM/VNet.
+- Longest prefix match first. Same prefix: **UDR > BGP > system**. Peering/service-endpoint system routes are special.
+- UDR next hops: VirtualAppliance (+ IP), VirtualNetworkGateway (VPN, not ER), None (drop), VNetLocal, Internet. **Not** peering.
+- NVA: **other** subnet; IP forwarding on **NIC + OS**. `0.0.0.0/0` to NVA = force via appliance. Not on `GatewaySubnet`.
+- Effective routes: **read** on the NIC.
+

@@ -1,6 +1,6 @@
 # Path 03 — Commands (Azure CLI ↔ Azure PowerShell)
 
-Scope: **modules 1–5** (VNet/IP + NSG + DNS + peering + routes). Grows with LB.
+Scope: **modules 1–6** (VNet/IP + NSG + DNS + peering + routes + LB). Grows with App Gateway / Watcher.
 
 ## Module 1 — VNet and IP
 
@@ -58,3 +58,16 @@ Scope: **modules 1–5** (VNet/IP + NSG + DNS + peering + routes). Grows with LB
 | NVA IP forwarding | `az network nic update -g rg -n nic-nva --ip-forwarding true` | `Set-AzNetworkInterface -EnableIPForwarding` |
 
 **Trap:** table → **subnet**, not NIC. Longest prefix first; same prefix UDR > BGP > system. NVA other subnet; forwarding NIC **and** OS. Next hop **None** = drop. No UDR next hop “peering.”
+
+## Module 6 — Load Balancer
+
+| Job | Azure CLI | Azure PowerShell |
+| --- | --- | --- |
+| Standard PIP | `az network public-ip create -g rg -n pip-lb --sku Standard --allocation-method Static` | `New-AzPublicIpAddress -Sku Standard` |
+| Public LB | `az network lb create -g rg -n lb --sku Standard --public-ip-address pip-lb --frontend-ip-name fe --backend-pool-name be` | `New-AzLoadBalancer -Sku Standard` |
+| Internal LB | `az network lb create ... --vnet-name vnet --subnet snet` (no PIP) | frontend subnet, not PIP |
+| Probe | `az network lb probe create -g rg --lb-name lb -n probe --protocol Http --port 80 --path /` | `Add-AzLoadBalancerProbeConfig` |
+| Rule | `az network lb rule create ... --frontend-port 80 --backend-port 80 --probe-name probe` | `Add-AzLoadBalancerRuleConfig` |
+| Add NIC to pool | `az network nic ip-config address-pool add ... --address-pool be` | backend pool NIC IP config |
+
+**Trap:** L4 not L7. Standard + Standard PIP. Closed until NSG. ILB = private frontend. HTTP probe = **200**. Probe source `168.63.129.16`. Basic SKU retired.

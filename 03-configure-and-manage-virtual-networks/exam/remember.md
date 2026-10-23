@@ -89,3 +89,11 @@ The `− 5` is **per subnet after you carve it**. Do not subtract it from the VN
 - NVA: **other** subnet; IP forwarding on **NIC + OS**. `0.0.0.0/0` to NVA = force via appliance. Not on `GatewaySubnet`.
 - Effective routes: **read** on the NIC.
 
+## Load Balancer (module 6)
+
+- **L4** TCP/UDP. Public = Standard **PIP** frontend. Internal = **subnet private IP**. Not internet.
+- **Standard** SKU. PIP SKU must match. **Closed** until NSG Allow. Basic retired (open, no zones).
+- Pieces: frontend, backend pool (NIC IP config / IP, **same VNet**), **probe**, **rule** (rule names the probe).
+- HTTP probe **200**. Source `168.63.129.16` / tag **AzureLoadBalancer**. Unhealthy = no **new** flows.
+- Inbound NAT = one VM, **no** probe. HA ports = ILB Standard, ports 0 / protocol All.
+

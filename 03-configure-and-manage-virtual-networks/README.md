@@ -2,7 +2,7 @@
 
 Microsoft Learn path: [AZ-104: Configure and manage virtual networks for Azure administrators](https://learn.microsoft.com/en-us/training/paths/az-104-manage-virtual-networks/) — 8 modules.
 
-This is **15–20%** of AZ-104 (virtual networking; skills measured as of 17 Apr 2026). Wrong answers are usually **address-space**, **reserved IPs**, **which resource the IP is attached to**, **NSG priority / associate target**, or **peering both-sides / non-transitive / gateway transit**. Snapshot: `AZ104-SKILLS.md` domain **4**.
+This is **15–20%** of AZ-104 (virtual networking; skills measured as of 17 Apr 2026). Wrong answers are usually **address-space**, **reserved IPs**, **which resource the IP is attached to**, **NSG priority / associate target**, **peering both-sides / non-transitive / gateway transit**, or **LB SKU / public vs internal / probe**. Snapshot: `AZ104-SKILLS.md` domain **4**.
 
 ## Module status
 
@@ -13,7 +13,7 @@ This is **15–20%** of AZ-104 (virtual networking; skills measured as of 17 Apr
 | 3 | Host your domain on Azure DNS | `03-host-domain-azure-dns/` | ✅ 2026-10-14 | ✅ Quiz 4 9/10; verbal 3/4 nits |
 | 4 | Configure Azure Virtual Network peering | `04-configure-virtual-network-peering/` | ✅ 2026-10-19 | ✅ Quiz 2 10/10; verbal 4/4 |
 | 5 | Manage and control traffic flow with routes | `05-control-network-traffic-flow-with-routes/` | ✅ 2026-10-21 | ✅ Quiz 1 10/10; verbal 4/4 |
-| 6 | Introduction to Azure Load Balancer | — | ⬜ | — |
+| 6 | Introduction to Azure Load Balancer | `06-introduction-to-azure-load-balancer/` | ✅ 2026-10-23 | ✅ Quiz 2 10/10; verbal 3/4 nits |
 | 7 | Introduction to Azure Application Gateway | — | ⬜ | — |
 | 8 | Introduction to Azure Network Watcher | — | ⬜ | — |
 

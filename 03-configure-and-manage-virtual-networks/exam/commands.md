@@ -1,6 +1,6 @@
 # Path 03 — Commands (Azure CLI ↔ Azure PowerShell)
 
-Scope: **modules 1–6** (VNet/IP + NSG + DNS + peering + routes + LB). Grows with App Gateway / Watcher.
+Scope: **modules 1–7** (VNet/IP + NSG + DNS + peering + routes + LB + Application Gateway). Grows with Network Watcher.
 
 ## Module 1 — VNet and IP
 
@@ -71,3 +71,15 @@ Scope: **modules 1–6** (VNet/IP + NSG + DNS + peering + routes + LB). Grows wi
 | Add NIC to pool | `az network nic ip-config address-pool add ... --address-pool be` | backend pool NIC IP config |
 
 **Trap:** L4 not L7. Standard + Standard PIP. Closed until NSG. ILB = private frontend. HTTP probe = **200**. Probe source `168.63.129.16`. Basic SKU retired.
+
+## Module 7 — Application Gateway
+
+| Job | Azure CLI | Azure PowerShell |
+| --- | --- | --- |
+| Dedicated subnet | `az network vnet subnet create -g rg --vnet-name vnet -n snet-appgw --address-prefixes 10.0.255.0/24` | `Add-AzVirtualNetworkSubnetConfig` |
+| Standard_v2 gateway | `az network application-gateway create -g rg -n appgw --sku Standard_v2 --min-capacity 1 --max-capacity 3 --vnet-name vnet --subnet snet-appgw --public-ip-address pip --priority 100` | `New-AzApplicationGateway` with SKU `Standard_v2` |
+| Re-encrypt to pool | `--http-settings-protocol Https --http-settings-port 443` | HTTP settings protocol Https, port 443 |
+| Probe match | custom probe `--host-name` / path | `New-AzApplicationGatewayProbeHealthResponseMatch -StatusCode 200-399` |
+| WAF | `--sku WAF_v2` plus a WAF policy | `New-AzApplicationGatewayFirewallPolicy` |
+
+**Trap:** L7, not UDP. Listener = host/port; path map = routing rule. Probe healthy **200–399**, source = gateway subnet, not `168.63.129.16`. v1 `Standard` / `WAF` retired. No load-balancing need → do not deploy one.

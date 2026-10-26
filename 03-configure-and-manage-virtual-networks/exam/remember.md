@@ -97,3 +97,14 @@ The `− 5` is **per subnet after you carve it**. Do not subtract it from the VN
 - HTTP probe **200**. Source `168.63.129.16` / tag **AzureLoadBalancer**. Unhealthy = no **new** flows.
 - Inbound NAT = one VM, **no** probe. HA ports = ILB Standard, ports 0 / protocol All.
 
+## Application Gateway (module 7)
+
+- **L7** HTTP(S). Not a skills-measured heading — know it well enough to reject it for TCP/UDP. Mixed papers stay light.
+- SKU **Standard_v2** or **WAF_v2**. v1 retired 28 Apr 2026. Autoscale = min/max, not `--capacity`.
+- Frontend: one public, one private, or both. Dedicated subnet (recommend `/24`).
+- **Listener** = protocol, port, host, cert. **Rule** = basic or **path-based**. Multi-site = host header.
+- Probe healthy **200–399** (LB is **200** only). Source = gateway instance IPs, not `168.63.129.16`.
+- TLS terminate at the listener, or re-encrypt (HTTP settings Https). App Service backend: do not upload that cert onto the gateway.
+- Hop order: DNS → frontend IP → **listener** (host, port, cert) → **WAF** → routing rule (path) → HTTP settings → healthy backend. Prevention blocks; Detection logs and forwards.
+- One small app with no load-balancing need → do not deploy a gateway. Global HTTP → Front Door. DNS failover → Traffic Manager.
+

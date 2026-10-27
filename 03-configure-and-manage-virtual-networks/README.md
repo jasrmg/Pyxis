@@ -15,7 +15,9 @@ This is **15–20%** of AZ-104 (virtual networking; skills measured as of 17 Apr
 | 5 | Manage and control traffic flow with routes | `05-control-network-traffic-flow-with-routes/` | ✅ 2026-10-21 | ✅ Quiz 1 10/10; verbal 4/4 |
 | 6 | Introduction to Azure Load Balancer | `06-introduction-to-azure-load-balancer/` | ✅ 2026-10-23 | ✅ Quiz 2 10/10; verbal 3/4 nits |
 | 7 | Introduction to Azure Application Gateway | `07-introduction-to-azure-application-gateway/` | ✅ 2026-10-26 | ✅ Quiz 1 9/10; verbal 3.5/4 nits |
-| 8 | Introduction to Azure Network Watcher | — | ⬜ | — |
+| 8 | Introduction to Azure Network Watcher | `08-introduction-to-azure-network-watcher/` | ✅ 2026-10-27 | ✅ Quiz 1 9/10; verbal 3.5/4 nits |
+
+Path exam: `quizzes/path-exam-1.md` — **10/10** on 2026-10-27. Study guide re-fetched that day; skills measured unchanged from 17 April 2026.
 
 ## Layout
 

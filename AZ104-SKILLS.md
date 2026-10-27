@@ -2,7 +2,7 @@
 
 **Source:** [Study guide for Exam AZ-104](https://learn.microsoft.com/en-us/credentials/certifications/resources/study-guides/az-104)  
 **As of:** 17 April 2026  
-**Fetched:** 2026-10-14  
+**Fetched:** 2026-10-27 (re-fetched before the path 03 exam; bullets unchanged)  
 **Pearson pass:** 700  
 
 Re-fetch the live page before a path-level exam, a mixed exam, or a new Learn path. If Microsoft changed bullets or weights, edit this file first.

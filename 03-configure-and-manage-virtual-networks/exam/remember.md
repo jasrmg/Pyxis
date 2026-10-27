@@ -108,3 +108,21 @@ The `− 5` is **per subnet after you carve it**. Do not subtract it from the VN
 - Hop order: DNS → frontend IP → **listener** (host, port, cert) → **WAF** → routing rule (path) → HTTP settings → healthy backend. Prevention blocks; Detection logs and forwards.
 - One small app with no load-balancing need → do not deploy a gateway. Global HTTP → Front Door. DNS failover → Traffic Manager.
 
+## Network Watcher (module 8)
+
+- **Regional.** First VNet in that region turns it on. Not one watcher per VNet. **IaaS only.** PaaS failures go to Service health.
+- **IP flow verify** = one 5-tuple, the **rule** (logical test, packet is not sent). **Effective security rules** = NIC + subnet + aggregate.
+- **Next hop** = route type and IP. UDR returns that route; otherwise **System Route**. It does not edit the table.
+- **Connection troubleshoot** = one TCP test. Faults: `NetworkSecurityRule`, `UserDefinedRoute`, `DNSResolution`, `GuestFirewall`, `CPU`, `Memory`.
+- **Connection monitor** = over time, hybrid included, Network Watcher extension on the Azure VM.
+- Packet capture = the packets. VPN troubleshoot = the gateway (`UnHealthy`). Topology = the map.
+- Flow logs → **storage account**. Create **VNet** flow logs. NSG flow logs: no new ones after 30 Jun 2025, retire 30 Sep 2027. Traffic analytics draws the logs.
+
+## Secure access the Learn path barely taught (skill 4.2)
+
+- **Bastion Basic/Standard:** subnet named **`AzureBastionSubnet`**, minimum **/26**. Bastion holds the public IP. The VM does not. RDP/SSH is in the browser over 443. No app VMs in that subnet.
+- **Service endpoint:** the PaaS service **keeps its public IP**. You turn the endpoint on the **subnet**, then allow that subnet on the service firewall. Traffic from the subnet is recognized as that VNet. You cannot UDR over a service-endpoint route.
+- **Private endpoint:** a **NIC and a private IP in your subnet**. Turn **public access off** on the PaaS resource. Link a **private DNS zone** so the name resolves to that private IP.
+- **ASG:** label on NICs in **one VNet**. The **NSG rule** names the ASG. An ASG is not a firewall.
+- **Effective security rules:** NIC NSG, subnet NSG, and the aggregate. A one-packet Allow/Deny is **IP flow verify**.
+

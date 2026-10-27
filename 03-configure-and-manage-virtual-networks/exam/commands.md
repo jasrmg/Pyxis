@@ -1,6 +1,6 @@
 # Path 03 — Commands (Azure CLI ↔ Azure PowerShell)
 
-Scope: **modules 1–7** (VNet/IP + NSG + DNS + peering + routes + LB + Application Gateway). Grows with Network Watcher.
+Scope: **modules 1–8** (VNet/IP + NSG + DNS + peering + routes + LB + Application Gateway + Network Watcher).
 
 ## Module 1 — VNet and IP
 
@@ -83,3 +83,15 @@ Scope: **modules 1–7** (VNet/IP + NSG + DNS + peering + routes + LB + Applicat
 | WAF | `--sku WAF_v2` plus a WAF policy | `New-AzApplicationGatewayFirewallPolicy` |
 
 **Trap:** L7, not UDP. Listener = host/port; path map = routing rule. Probe healthy **200–399**, source = gateway subnet, not `168.63.129.16`. v1 `Standard` / `WAF` retired. No load-balancing need → do not deploy one.
+
+## Module 8 — Network Watcher
+
+| Job | Azure CLI | Azure PowerShell |
+| --- | --- | --- |
+| Which NSG rule? | `az network watcher test-ip-flow -g rg --vm vm --direction Inbound --protocol TCP --local 10.0.1.4:5986 --remote 10.0.2.4:*` | `Test-AzNetworkWatcherIPFlow` |
+| Which route? | `az network watcher show-next-hop -g rg --vm vm --source-ip 10.0.1.4 --dest-ip 10.0.2.4` | `Get-AzNetworkWatcherNextHop` |
+| One TCP test | `az network watcher test-connectivity -g rg --source-resource vm --dest-address 10.0.2.4 --dest-port 5986` | `Test-AzNetworkWatcherConnectivity` |
+| VNet flow log | `az network watcher flow-log create -g rg -l eastus -n flow --vnet vnet --storage-account st` | flow log target = VNet, storage account |
+| Effective NSG list | `az network nic list-effective-nsg -g rg -n nic` | `Get-AzEffectiveNetworkSecurityGroup` |
+
+**Trap:** Regional, automatic with the VNet. IP flow verify = one packet and the **rule**. Next hop = the **route**. Effective security rules = the **list**. Connection troubleshoot = once. Connection monitor = over time. Not for PaaS. New flow logs are **VNet** flow logs into a storage account.

@@ -38,7 +38,11 @@ Layout: path 01 is a single folder (2 modules). Path 02 onward uses **one subfol
   - [x] Module 6 Azure Load Balancer — read 2026-10-23; Quiz 1 7/10 FAIL; Quiz 2 **10/10 (100%) PASS**; verbal (2026-10-23) **3/4 (75%) PASS with nits** — Closed: public vs ILB **type**, probe path/source/200, Standard closed until NSG, Deny AzureLoadBalancer breaks probes. Nit: ILB **frontend** is a **subnet private IP**, not a Standard PIP (that is public only). Attach **NIC IP config** (or IP), not “the VM.”
   - [x] Module 7 Azure Application Gateway — read 2026-10-26; Quiz 1 rescored **9/10 (90%) PASS**; verbal (2026-10-26) **3.5/4 PASS with nits**. Closed: DNS → frontend IP → listener (host + TLS) → WAF → path rule (`/images/*`) → HTTP settings → healthy pool; probe **200–399** from the gateway subnet; TCP 1433 = Load Balancer. Nit: WAF **Detection** logs and still forwards. Prevention is the mode that stops the request.
   - [x] Module 8 Azure Network Watcher — read 2026-10-27; Quiz 1 **9/10 (90%) PASS**; verbal (2026-10-27) **3.5/4 PASS with nits**, closed on restatement the same night. Next hop only reads. `DNSResolution` means fix DNS before any NSG change.
-- [ ] **04 Implement and manage storage in Azure** — not started
+- [ ] **04 Implement and manage storage in Azure** — 1 of 4 modules read
+  - [x] Module 1 Configure storage accounts — read 2026-11-03; Quiz 1 rescored **9/10 (90%) PASS**; verbal (2026-11-03) **3.5/4 PASS with nits**. Closed: premium files are not GRS; **RA-GZRS**; `-secondary` reads the paired region. Nits: say kind **`FileStorage`** and SKU **`Premium_LRS`** or **`Premium_ZRS`**. Selected networks allow the subnet and the **office public IP**. The public endpoint is what stays up. You do not add it as a rule.
+  - [ ] Module 2 Configure Azure Blob Storage — not started
+  - [ ] Module 3 Configure Azure Storage security — not started
+  - [ ] Module 4 Configure Azure Files — not started
 - [ ] **05 Deploy and manage Azure compute resources** — not started
 - [ ] **06 Monitor and back up Azure resources** — not started
 
@@ -95,3 +99,5 @@ Layout: path 01 is a single folder (2 modules). Path 02 onward uses **one subfol
 | 2026-10-27 | 03 Module 8 Network Watcher — Quiz 1 | 9/10 (90%) | PASS — Q9: Connection monitor, not effective security rules, is the ongoing check |
 | 2026-10-27 | 03 Module 8 — Network Watcher verbal | 3.5/4 | PASS with nits — restated: next hop is read-only; fix DNS before an NSG change |
 | 2026-10-27 | 03 Path exam 1 | 10/10 (100%) | PASS — domain 4 |
+| 2026-11-03 | 04 Module 1 Storage accounts — Quiz 1 | 9/10 (90%) | PASS — rescored. Q5 counts (stem leaked the key). Miss: FileStorage is Premium_LRS or Premium_ZRS, not Standard_GRS |
+| 2026-11-03 | 04 Module 1 — storage accounts verbal | 3.5/4 | PASS with nits — name FileStorage + Premium_LRS/ZRS; allow the office public IP, not “the public endpoint” |

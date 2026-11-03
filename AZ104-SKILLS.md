@@ -2,7 +2,7 @@
 
 **Source:** [Study guide for Exam AZ-104](https://learn.microsoft.com/en-us/credentials/certifications/resources/study-guides/az-104)  
 **As of:** 17 April 2026  
-**Fetched:** 2026-10-27 (re-fetched before the path 03 exam; bullets unchanged)  
+**Fetched:** 2026-11-03 (re-checked at the start of path 04). The page chrome returned the 26 Oct 2023 section. Storage bullets this path uses (create/configure, redundancy, firewalls and VNets, encryption) match the 17 Apr 2026 snapshot, so the snapshot was not replaced.  
 **Pearson pass:** 700  
 
 Re-fetch the live page before a path-level exam, a mixed exam, or a new Learn path. If Microsoft changed bullets or weights, edit this file first.

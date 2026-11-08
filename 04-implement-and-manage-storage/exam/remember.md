@@ -48,3 +48,12 @@ Lowest option that survives a zone, survives a region, and can be read in the ot
 - **Private endpoint**: a **NIC and a private IP in your subnet**. Public access can be turned off. Private DNS zone so the blob name resolves to that private IP.
 - Firewall **default Deny**, then allow selected subnets and public IPs. Default Allow is the open internet.
 - **Secure transfer required** means HTTPS only.
+
+## Blob (module 2)
+
+- Account → **container** → blob. Container name 3–63, lowercase, unique in the account.
+- Tiers for **block** blobs: **Hot** (frequent), **Cool** (30-day minimum), **Cold** (90), **Archive** (180, offline, hours to rehydrate). Account default is Hot, Cool, or Cold. Not Archive.
+- Hot ↔ Cool ↔ Cold is immediate. Archive → online is a **rehydrate** (standard up to 15 hours).
+- Lifecycle moves **cooler** or deletes. Prefix filter. Early delete before the minimum stay costs extra. Cool → Hot **on access** is the exception.
+- **Versioning** = overwrite history. **Soft delete** = deleted blob or container for N days. **Snapshot** is not copied by object replication.
+- Object replication: versioning on **source and destination**, Hot/Cool/Cold only, containers you name. Not account GRS, and not a failover.

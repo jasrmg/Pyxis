@@ -9,7 +9,7 @@ This is **15–20%** of AZ-104 (storage; skills measured snapshot `AZ104-SKILLS.
 | # | Learn module | Folder | Read | Quiz |
 | --- | --- | --- | --- | --- |
 | 1 | Configure storage accounts | `01-configure-storage-accounts/` | ✅ 2026-11-03 | ✅ Quiz 1 9/10; verbal 3.5/4 nits |
-| 2 | Configure Azure Blob Storage | — | ⬜ | — |
+| 2 | Configure Azure Blob Storage | `02-configure-azure-blob-storage/` | ✅ 2026-11-08 | ✅ Quiz 1 9/10; verbal 3.5/4 nits |
 | 3 | Configure Azure Storage security | — | ⬜ | — |
 | 4 | Configure Azure Files | — | ⬜ | — |
 

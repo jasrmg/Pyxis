@@ -1,6 +1,6 @@
 # Path 04 — Commands (Azure CLI ↔ Azure PowerShell)
 
-Scope: **modules 1–2** (storage accounts + Blob). Grows with storage security and Azure Files.
+Scope: **modules 1–3** (storage accounts, Blob, storage security). Grows with Azure Files.
 
 ## Module 1 — Storage accounts
 
@@ -23,3 +23,14 @@ Scope: **modules 1–2** (storage accounts + Blob). Grows with storage security 
 | Lifecycle policy | `az storage account management-policy create -g rg --account-name stapp001 --policy @policy.json` | `Set-AzStorageAccountManagementPolicy` |
 
 **Trap:** Object replication needs versioning on **both** accounts. It does not copy snapshots. Archive is not an online tier and is not an account default. Container `publicAccess: Blob` does nothing when the account disallows anonymous access.
+
+## Module 3 — Storage security
+
+| Job | Azure CLI | Azure PowerShell |
+| --- | --- | --- |
+| Stored access policy on a container | `az storage container policy create --account-name stapp001 -c images -n read-2h --permissions r --expiry <utc> --auth-mode login` | `New-AzStorageContainerStoredAccessPolicy -Policy read-2h -Permission r` |
+| Service SAS that names the policy | `az storage blob generate-sas --account-name stapp001 -c images -n logo.png --policy-name read-2h --https-only --auth-mode key` | `New-AzStorageBlobSASToken -Policy read-2h -Protocol HttpsOnly` |
+| Regenerate key1 | `az storage account keys renew -g rg -n stapp001 --key key1` | `New-AzStorageAccountKey -KeyName key1` |
+| Turn off Shared Key | `az storage account update -g rg -n stapp001 --allow-shared-key-access false` | `Set-AzStorageAccount -AllowSharedKeyAccess $false` |
+
+**Trap:** `si` is the stored access policy, and only a **service** SAS can use it. Regenerating key1 kills SAS tokens signed with key1, not a user delegation SAS and not a SAS signed with key2. CMK is `keySource: Microsoft.Keyvault` in the **same region**. That key is not key1.

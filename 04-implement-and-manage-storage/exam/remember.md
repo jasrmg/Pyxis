@@ -57,3 +57,14 @@ Lowest option that survives a zone, survives a region, and can be read in the ot
 - Lifecycle moves **cooler** or deletes. Prefix filter. Early delete before the minimum stay costs extra. Cool → Hot **on access** is the exception.
 - **Versioning** = overwrite history. **Soft delete** = deleted blob or container for N days. **Snapshot** is not copied by object replication.
 - Object replication: versioning on **source and destination**, Hot/Cool/Cold only, containers you name. Not account GRS, and not a failover.
+
+## Storage security (module 3)
+
+- **key1 / key2** authorize the caller and sign account SAS and service SAS. **CMK** encrypts bytes at rest. Rotating one does not rotate the other.
+- **User delegation SAS:** Entra, Blob and Data Lake, no stored access policy, survives a key regenerate. Delegation key max **7 days**.
+- **Service SAS:** one resource, account key, **can** name a stored access policy with `si`. Delete the policy to revoke it. Max **5** policies on a container, share, queue, or table.
+- **Account SAS:** `ss` services (`bf` = blob and files). No stored access policy.
+- `sp` permissions, `st` start, `se` expiry, `spr=https` is HTTPS only, `sig` is the HMAC not the key. Clock skew **15 minutes**.
+- Regenerating key1 kills only SAS tokens signed with key1. `--allow-shared-key-access false` kills Shared Key and key-signed SAS. Entra and user delegation SAS remain.
+- CMK: Key Vault or Managed HSM, **same region**, subscription may differ. `Microsoft.Keyvault` vs `Microsoft.Storage`. SSE cannot be turned off.
+- Production data access the module wants: **Entra ID or a SAS**. Not Shared Key in the app. Contributor on the account does not read blob bytes.

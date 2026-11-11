@@ -1,6 +1,6 @@
 # Path 04 — Commands (Azure CLI ↔ Azure PowerShell)
 
-Scope: **modules 1–3** (storage accounts, Blob, storage security). Grows with Azure Files.
+Scope: **modules 1–4** (storage accounts, Blob, storage security, Azure Files).
 
 ## Module 1 — Storage accounts
 
@@ -34,3 +34,13 @@ Scope: **modules 1–3** (storage accounts, Blob, storage security). Grows with 
 | Turn off Shared Key | `az storage account update -g rg -n stapp001 --allow-shared-key-access false` | `Set-AzStorageAccount -AllowSharedKeyAccess $false` |
 
 **Trap:** `si` is the stored access policy, and only a **service** SAS can use it. Regenerating key1 kills SAS tokens signed with key1, not a user delegation SAS and not a SAS signed with key2. CMK is `keySource: Microsoft.Keyvault` in the **same region**. That key is not key1.
+
+## Module 4 — Azure Files
+
+| Job | Azure CLI | Azure PowerShell |
+| --- | --- | --- |
+| Hot SMB share | `az storage share-rm create -g rg --storage-account stapp001 -n dept --quota 100 --access-tier Hot` | `New-AzRmStorageShare -Name dept -QuotaGiB 100 -AccessTier Hot` |
+| Share soft delete, 14 days | `az storage account file-service-properties update -g rg --account-name stapp001 --enable-delete-retention true --delete-retention-days 14` | `Update-AzStorageFileServiceProperty -EnableShareDeleteRetentionPolicy $true -ShareRetentionDays 14` |
+| Share snapshot | `az storage share snapshot --account-name stapp001 -n dept --auth-mode login` | `New-AzStorageShare -Name dept -Snapshot` |
+
+**Trap:** SMB mount port is **445**. A SAS does not mount the share. `FileStorage` is `Premium_LRS` or `Premium_ZRS` only. Soft delete is **1–365** days on the account file service. Cloud tiering is on the **server endpoint**, after the Storage Sync Service, the registered server, and the sync group.

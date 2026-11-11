@@ -68,3 +68,11 @@ Lowest option that survives a zone, survives a region, and can be read in the ot
 - Regenerating key1 kills only SAS tokens signed with key1. `--allow-shared-key-access false` kills Shared Key and key-signed SAS. Entra and user delegation SAS remain.
 - CMK: Key Vault or Managed HSM, **same region**, subscription may differ. `Microsoft.Keyvault` vs `Microsoft.Storage`. SSE cannot be turned off.
 - Production data access the module wants: **Entra ID or a SAS**. Not Shared Key in the app. Contributor on the account does not read blob bytes.
+
+## Azure Files (module 4)
+
+- **Premium** = `FileStorage`, SSD, **Premium_LRS** or **Premium_ZRS**, provisioned. **Standard** tiers Transaction Optimized, Hot, and Cool sit on general-purpose v2 and can be GRS, RA-GRS, GZRS, or RA-GZRS. Cool is still online. No Archive tier.
+- One share is **SMB or NFS**, not both. NFS is premium, Linux, private endpoint or service endpoint. SMB mount is TCP **445**.
+- Identity: **AD DS**, **Entra Domain Services**, or **Entra Kerberos**, then share role Reader / Contributor / **Elevated Contributor**, then **NTFS**. The account key bypasses both. A SAS is REST only, not the SMB password.
+- **Snapshot** = read-only point in time of one share, up to **200**, restore one file or the share. **Soft delete** = deleted share, **1–365** days, set on the account, new or existing, SMB and NFS.
+- **File Sync:** Storage Sync Service in the share’s region, registered Windows Server, sync group with one cloud endpoint. **Cloud tiering** frees local disk. It is not the sync schedule and not a backup.

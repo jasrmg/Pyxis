@@ -2,7 +2,7 @@
 
 **Source:** [Study guide for Exam AZ-104](https://learn.microsoft.com/en-us/credentials/certifications/resources/study-guides/az-104)  
 **As of:** 17 April 2026  
-**Fetched:** 2026-11-11 (re-checked before the path 04 exam). The page chrome again returned the 26 Oct 2023 section. Domain weights are unchanged. Storage bullets in that chrome match this snapshot except the chrome folds blob soft delete into the Files snapshot line. The 17 Apr 2026 snapshot stays.  
+**Fetched:** 2026-11-14 (re-checked before path 05). The page chrome again returned the 26 Oct 2023 section. Domain weights are unchanged. That chrome says “Configure Azure Disk Encryption” where this snapshot says encryption at host. Both are taught. The 17 Apr 2026 snapshot stays.  
 **Pearson pass:** 700  
 
 Re-fetch the live page before a path-level exam, a mixed exam, or a new Learn path. If Microsoft changed bullets or weights, edit this file first.

@@ -43,7 +43,12 @@ Layout: path 01 is a single folder (2 modules). Path 02 onward uses **one subfol
   - [x] Module 2 Configure Azure Blob Storage — read 2026-11-08; Quiz 1 **9/10 (90%) PASS**; verbal (2026-11-08) **3.5/4 PASS with nits**. Closed: replication order is accounts and containers, versioning on both, then the policy, then upload; Archive rehydrate is up to 15 hours and the stay is 180 days; `allowBlobPublicAccess: false` blocks anonymous GET. Nit: an overwrite is not a soft delete. Soft delete brings back a delete. Versioning keeps the previous bytes.
   - [x] Module 3 Configure Azure Storage security — read 2026-11-09; Quiz 1 **9/10 (90%) PASS**; verbal (2026-11-09) **4/4 PASS with nits**. Closed: CMK is Key Vault or Managed HSM, same region, subscriptions may differ; revoke a service SAS by changing its stored access policy; key1 renew kills only key1 SAS; user delegation SAS is Entra. Nit: that policy change is a delete, or a change to permissions, expiry, or the identifier.
   - [x] Module 4 Configure Azure Files — read 2026-11-11; Quiz 1 **9/10 (90%) PASS**; verbal first pass **2.5/4**, closed on restatement **3.5/4 PASS with nits**. Cloud tiering frees local disk and does not set the sync schedule. A file in a live share comes back from a snapshot. Paired-region read with no failover is RA-GRS or RA-GZRS. Nits: general-purpose v2 is the **kind**, `Standard_RAGRS` is the **SKU**; the Windows share protocol is **SMB**. Directory sources by their full names, then NTFS.
-- [ ] **05 Deploy and manage Azure compute resources** — not started
+- [ ] **05 Deploy and manage Azure compute resources** — 1 of 5 modules read
+  - [x] Module 1 Introduction to Azure virtual machines — read 2026-11-14; Quiz 1 **10/10 (100%) PASS**; verbal (2026-11-15) **3/4 PASS with nits**. Closed: deallocate stops compute billing, disks keep billing, temp disk is wiped; encryption at host versus BitLocker or dm-crypt; a zone survives one datacenter and Site Recovery is the regional failover. Nits: a running resize reboots on the **same** cluster or it fails. Deallocate, then resize, to leave that cluster. A VM that is off most of the night is **pay as you go** plus auto-shutdown. A reservation is a 1- or 3-year commit for compute you keep allocated. GRS does not start the VM in the other region.
+  - [ ] Module 2 Configure virtual machine availability — not started
+  - [ ] Module 3 Configure Azure App Service plans — not started
+  - [ ] Module 4 Configure Azure App Service — not started
+  - [ ] Module 5 Configure Azure Container Instances — not started
 - [ ] **06 Monitor and back up Azure resources** — not started
 
 ## Quiz log
@@ -109,3 +114,5 @@ Layout: path 01 is a single folder (2 modules). Path 02 onward uses **one subfol
 | 2026-11-11 | 04 Module 4 — Azure Files verbal | 2.5/4 | FAIL — NEEDS REVIEW — file inside a live share is a snapshot; paired-region read with no failover is RA-GRS or RA-GZRS |
 | 2026-11-11 | 04 Module 4 — Azure Files verbal restatement | 3.5/4 | PASS with nits — snapshot vs share soft delete; RA-GRS. Kind is general-purpose v2, SKU is Standard_RAGRS, protocol is SMB |
 | 2026-11-11 | 04 Path exam 1 | 10/10 (100%) | PASS — domain 2 |
+| 2026-11-14 | 05 Module 1 Introduction to Azure VMs — Quiz 1 | 10/10 (100%) | PASS |
+| 2026-11-15 | 05 Module 1 — VM intro verbal | 3/4 | PASS with nits — running resize stays on the same cluster; night-off VM is pay as you go, not a reservation |

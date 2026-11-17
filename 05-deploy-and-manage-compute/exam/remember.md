@@ -38,9 +38,12 @@
 - Portal, **ARM JSON**, Azure CLI, Azure PowerShell. Export template from the VM’s Automation blade. Redeploying the template makes the resources match it. `az bicep decompile` turns exported ARM into Bicep.
 - The unit also shows Terraform. This exam does not.
 
-## Availability the unit introduces
+## Availability (module 2)
 
-- **Availability zone:** a separate datacenter in the region, with its own power, network, and cooling. Three zones in a supported region. Protects against one datacenter. Not against the whole region.
-- **Scale set:** a group of VMs that can grow or shrink. The set itself is free. You pay for each instance. Instances can sit in one zone, several zones, or regionally.
-- **Site Recovery:** replicates the VM to another region so you can fail over. A zone does not do that.
-- An **availability set** (fault domains and update domains, one datacenter) is the next module. A VM is in a set or in zones, not both.
+- **Fault domain** = a rack. Default **2**, up to **3**. **Update domain** = VMs that reboot together. Default **5**, range **1–20**. Both counts are fixed after the set is created. Planned maintenance reboots **one** update domain at a time.
+- A VM joins a set **only at create**. A VM is in a set **or** a zone, not both. A set survives a rack, not a datacenter.
+- A **zone** is a separate datacenter. Enabled regions have at least **three**. Zonal resources are pinned (VM, disk). Zone-redundant resources are copied for you (ZRS, Azure SQL). A zone does not survive the region. **Site Recovery** does.
+- **Vertical** changes the size and usually restarts. **Horizontal** changes the instance count. Autoscale is horizontal, between the minimum and the maximum.
+- Scale set **Flexible** is the default. **Max spreading** is the one to use. **Fixed spreading** fails without five fault domains.
+- A known Thursday peak is a **schedule** rule. CPU already high is a **metric** rule, and only if autoscale is on and the count is under the maximum.
+- Predicted hardware failure is **live migration**. Unexpected healing can **reboot** and wipe the temporary disk. Microsoft does not patch the guest OS.

@@ -47,3 +47,12 @@
 - Scale set **Flexible** is the default. **Max spreading** is the one to use. **Fixed spreading** fails without five fault domains.
 - A known Thursday peak is a **schedule** rule. CPU already high is a **metric** rule, and only if autoscale is on and the count is under the maximum.
 - Predicted hardware failure is **live migration**. Unexpected healing can **reboot** and wipe the temporary disk. Microsoft does not patch the guest OS.
+
+## App Service plans (module 3)
+
+- You pay for the **plan**. Apps on it share the instances. The app count is not a charge. Windows and Linux do not share a plan. The plan’s region is the apps’ region.
+- Ladder: **Free** test → **Shared** custom domain → **Basic** SSL and a dedicated VM → **Standard** first staging slot and autoscale → **Premium v3** when you need **10** slots → **Isolated** to reach **100** instances.
+- A bigger size in the same tier adds cores and memory. It does not add slots.
+- **Scale up** changes the SKU for every app. No redeploy. **Scale out** changes the instance count. Autoscale is scale out only. SQL and Storage do not follow the plan.
+- Autoscale: minimum, a **higher** maximum, a default for missing metrics, and both a scale-out and a scale-in rule. **8:00 AM** is time-based. CPU is metric-based.
+- **Automatic scaling** (no rules, HTTP, warm instances) is **Premium v2 or Premium v3** only.

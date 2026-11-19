@@ -1,6 +1,6 @@
 # Path 05 — Commands (Azure CLI ↔ Azure PowerShell)
 
-Scope: **modules 1–2** (create a VM, availability sets, scale sets). Grows with App Service and containers.
+Scope: **modules 1–3** (VMs, availability, App Service plans). Grows with the app, slots, and containers.
 
 ## Module 1 — Virtual machines
 
@@ -24,3 +24,12 @@ Scope: **modules 1–2** (create a VM, availability sets, scale sets). Grows wit
 | Flexible scale set across zones | `az vmss create -g rg -n vmss-web --image Ubuntu2204 --orchestration-mode Flexible --zones 1 2 3 --instance-count 2` | `New-AzVmss` with `-OrchestrationMode Flexible` |
 
 **Trap:** Do not pass `--availability-set` and `--zone` on the same VM. Update domain count is **5** by default, **20** at most, and it cannot be edited. A running VM cannot be added to a set. Fixed spreading fails without five fault domains. Autoscale changes the instance count, not the size, and it stops at the maximum.
+
+## Module 3 — App Service plans
+
+| Job | Azure CLI | Azure PowerShell |
+| --- | --- | --- |
+| Standard plan, one worker | `az appservice plan create -g rg -n asp-hotel -l eastus --sku S1 --number-of-workers 1` | `New-AzAppServicePlan -Name asp-hotel -Tier Standard -WorkerSize Small -NumberofWorkers 1` |
+| Scale up to Premium v3 and three workers | `az appservice plan update -g rg -n asp-hotel --sku P1V3 --number-of-workers 3` | `Set-AzAppServicePlan -Tier PremiumV3 -NumberofWorkers 3` |
+
+**Trap:** The bill is the plan, not the app count. Scale up is the SKU. Scale out is `--number-of-workers`. Custom domain is Shared, SSL is Basic, the first staging slot is Standard, and **10** slots is **P1V3**. Isolated can reach **100** instances. 8:00 AM is a time rule. Automatic scaling with no rules is Premium v2 or v3 only.
